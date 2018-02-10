@@ -1,0 +1,80 @@
+.app-wrapper {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  /* background: #8E9AFF; */
+}
+
+.app {
+  height: 50%;
+  width: 100%;
+  background: #8E9AFF;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.app--top.active {
+  transform: translateY(-70%);
+}
+
+.app--bottom.active {
+  transform: translateY(70%);
+}
+
+.app-logo {
+  width: 100px;
+  height: 100px;
+  padding: 5%;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 4%;
+}
+
+.app-banner {
+  color: #ffffff;
+  font-size: 20px;
+  position: absolute;
+  top: 0%;
+}
+
+.app-dictaphone {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.app-dictaphone.loaded {
+  opacity: 1;
+}
+
+.app-dictaphone__body {
+  height: 70%;
+  width: 100%;
+  background: #fff;
+}
+
+.app-webcam {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  opacity: 0;
+  z-index: -1;
+  position: relative;
+}
