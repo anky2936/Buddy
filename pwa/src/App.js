@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import speaker from './speaker-icon.svg';
 import './App.css';
 import Dictaphone from './Dictaphone';
+import Snapshot from './Snapshot';
 import axios from 'axios';
-import Webcam from 'react-webcam';
 
 
 class App extends Component {
@@ -13,11 +13,8 @@ class App extends Component {
     this.state = {
       listening: false,
       transcript: '',
-      takeSnapshot: false
+      snapshotActive: false
     };
-  }
-  setRef = (webcam) => {
-    this.webcam = webcam;
   }
   onScreenTap = () => {
     const isListening = this.state.listening;
@@ -36,6 +33,7 @@ class App extends Component {
     console.log(transcript);
 
     this.setState({
+      listening: false,
       transcript: transcript
     }, () => {
       this.extractTask();
@@ -47,32 +45,20 @@ class App extends Component {
 
     if(DOExp) {
       const keyword = transcript.split(' ')[transcript.length - 1];
-
-      // this.sendRequest({
-      //   intent: 'DO',
-      //   entity: keyword
-      // });    
+  
       this.setState({
-        takeSnapshot: true,
-        listening: false
-      }, () => {
-        setTimeout(() => {
-          this.onCapture();
-        }, 500); 
+        snapshotActive: true
       });  
-
     } else {
       console.error('No intent recognized');
     }
   }
-  onCapture = () => {
-    const imageSrc = this.webcam.getScreenshot();
-
-    console.log(imageSrc);
-
+  onCapture = (snapshot) => {
     this.setState({
-      takeSnapshot: false,
+      snapshotActive: false
     });
+
+    console.log(snapshot);
   }
   render() {
     return (
@@ -90,11 +76,7 @@ class App extends Component {
             <Dictaphone finalizeTranscript={this.finalizeTranscript} />
           ) : null
         }
-        {
-          this.state.takeSnapshot ? (
-            <Webcam className="app-webcam" audio={false} ref={this.setRef}  screenshotFormat="image/jpeg"/>
-          ) : null
-        }
+        <Snapshot snapshotActive={this.state.snapshotActive} onCapture={this.onCapture}/>
       </div>
     );
   }

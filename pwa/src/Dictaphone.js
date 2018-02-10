@@ -9,6 +9,11 @@ class Dictaphone extends Component {
       loaded: false
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.finalTranscript) {
+      this.props.finalizeTranscript(nextProps.finalTranscript);
+    }
+  }
   componentWillMount() {
     if(!this.props.listening) {
       this.props.startListening();
@@ -19,9 +24,6 @@ class Dictaphone extends Component {
     setTimeout(() => {
       this.setState({loaded: true});
     }, 300);
-  }
-  componentWillUnmount() {
-    this.props.finalizeTranscript(this.props.transcript);
   }
   render() {
     const { transcript, resetTranscript, start } = this.props
