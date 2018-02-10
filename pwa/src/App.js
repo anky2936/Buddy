@@ -63,13 +63,13 @@ class App extends Component {
   render() {
     return (
       <div className="app-wrapper" onClick={this.onScreenTap}>
-        <div className={"app app--top " + (this.state.listening ? "active" : "")}>
-          <div className="app-logo">
+        <div className={"app app--top" + (this.state.listening ? " active" : "")}>
+          <div className={"app-logo" + (this.state.listening ? " hidden" : "")}>
             <img src={speaker} alt="speaker-icon" />
           </div>
         </div>
-        <div className={"app app--bottom " + (this.state.listening ? "active" : "")}>
-          <p className="app-banner">Tap to speak</p>
+        <div className={"app app--bottom" + (this.state.listening ? " active" : "")}>
+          <p className={"app-banner" + (this.state.listening ? " hidden" : "")}>Tap to speak</p>
         </div>
         {
           this.state.listening ? (

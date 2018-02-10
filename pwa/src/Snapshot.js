@@ -22,8 +22,6 @@ export default class Snapshot extends Component {
     this.webcam = webcam;
   }
   render() {
-    const { height, width, start } = this.props
-
     return (
       <Webcam className={this.state.active ? "app-webcam" : "hidden"} height={700} width={412} audio={false} ref={this.setRef}  screenshotFormat="image/jpeg"/>
     )

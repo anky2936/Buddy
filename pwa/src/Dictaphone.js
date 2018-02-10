@@ -26,7 +26,13 @@ class Dictaphone extends Component {
     }, 300);
   }
   render() {
-    const { transcript, resetTranscript, start } = this.props
+    const { transcript, browserSupportsSpeechRecognition } = this.props
+
+    if (!browserSupportsSpeechRecognition) {
+      console.error('No Support');
+
+      return null;
+    }
 
     return (
       <div className={"app-dictaphone" + (this.state.loaded ? " loaded" : null)}>
